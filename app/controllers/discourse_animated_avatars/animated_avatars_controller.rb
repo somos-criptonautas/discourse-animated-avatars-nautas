@@ -2,6 +2,7 @@
 
 module DiscourseAnimatedAvatars
   class AnimatedAvatarsController < ::ApplicationController
+    requires_plugin DiscourseAnimatedAvatars::PLUGIN_NAME
     requires_login
 
     # PUT /u/:username/animated-avatar.json
@@ -19,9 +20,7 @@ module DiscourseAnimatedAvatars
         upload = Upload.find_by(id: upload_id)
         return render_json_error(I18n.t("animated_avatars.missing_upload")) if upload.nil?
 
-        unless upload.animated?
-          return render_json_error(I18n.t("animated_avatars.not_animated"))
-        end
+        return render_json_error(I18n.t("animated_avatars.not_animated")) unless upload.animated?
 
         user.custom_fields[DiscourseAnimatedAvatars::UPLOAD_FIELD] = upload.id
       end

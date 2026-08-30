@@ -5,6 +5,7 @@
 # url: https://github.com/discourse/discourse-animated-avatars
 
 module ::DiscourseAnimatedAvatars
+  PLUGIN_NAME = "discourse-animated-avatars"
   UPLOAD_FIELD = "animated_avatar_upload_id"
 end
 
@@ -73,8 +74,7 @@ after_initialize do
 end
 
 Discourse::Application.routes.append do
-  put "/u/:username/animated-avatar" =>
-        "discourse_animated_avatars/animated_avatars#update",
+  put "/u/:username/animated-avatar" => "discourse_animated_avatars/animated_avatars#update",
       :constraints => {
         username: RouteFormat.username,
       }

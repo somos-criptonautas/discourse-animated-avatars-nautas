@@ -46,10 +46,7 @@ RSpec.describe DiscourseAnimatedAvatars::AnimatedAvatarsController do
 
   it "refuses users below the trust level" do
     sign_in(low_tl_user)
-    put "/u/#{low_tl_user.username}/animated-avatar.json",
-        params: {
-          upload_id: animated_upload.id,
-        }
+    put "/u/#{low_tl_user.username}/animated-avatar.json", params: { upload_id: animated_upload.id }
     expect(response.status).to eq(403)
   end
 end
