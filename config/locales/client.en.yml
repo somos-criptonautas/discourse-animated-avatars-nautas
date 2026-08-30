@@ -1,0 +1,5 @@
+en:
+  js:
+    animated_avatars:
+      title: "Animated avatar"
+      instructions: "Shown only on your profile page and user card. Your regular avatar is used everywhere else."

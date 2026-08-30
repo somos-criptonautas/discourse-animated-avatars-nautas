@@ -4,11 +4,16 @@
 # version: 0.1
 # url: https://github.com/discourse/discourse-animated-avatars
 
+module ::DiscourseAnimatedAvatars
+  UPLOAD_FIELD = "animated_avatar_upload_id"
+end
+
 after_initialize do
   require_relative "lib/discourse_animated_avatars/upload_creator_gifsicle_extension"
   require_relative "lib/discourse_animated_avatars/upload_creator_no_gifsicle_extension"
   require_relative "lib/discourse_animated_avatars/optimized_image_extension"
   require_relative "lib/discourse_animated_avatars/user_avatars_controller_extension"
+  require_relative "app/controllers/discourse_animated_avatars/animated_avatars_controller"
 
   reloadable_patch do
     gifsicle_installed =
@@ -37,24 +42,43 @@ after_initialize do
     UserAvatarsController.prepend(DiscourseAnimatedAvatars::UserAvatarsControllerExtension)
   end
 
-  add_to_class(:user, :animated_avatar) do
-    pass_tl_check = staff? || trust_level >= SiteSetting.animated_avatars_min_trust_level_to_display
-    uploaded_avatar&.url if uploaded_avatar&.animated? && pass_tl_check
+  register_user_custom_field_type(DiscourseAnimatedAvatars::UPLOAD_FIELD, :integer)
+
+  # keeps the upload out of the orphan cleanup job
+  register_upload_in_use do |upload|
+    UserCustomField.exists?(name: DiscourseAnimatedAvatars::UPLOAD_FIELD, value: upload.id.to_s)
   end
 
-  add_to_serializer(:basic_user, :animated_avatar) do
+  add_to_class(:user, :can_use_animated_avatar?) do
+    staff? || trust_level >= SiteSetting.animated_avatars_min_trust_level_to_display
+  end
+
+  # ponytail: serves the full cropped gif (avatar_sizes.max), rendered at 144px.
+  # Swap for an OptimizedImage if the weight ever shows up in page timings.
+  add_to_class(:user, :animated_avatar) do
+    return nil unless can_use_animated_avatar?
+    upload_id = custom_fields[DiscourseAnimatedAvatars::UPLOAD_FIELD]
+    Upload.find_by(id: upload_id)&.url if upload_id
+  end
+
+  # user_card only (UserSerializer inherits it): reading custom_fields per post
+  # author would be an N+1 on every topic page, and posts never animate.
+  add_to_serializer(:user_card, :animated_avatar) do
     user.try(:animated_avatar)
   rescue StandardError
     nil
   end
-  add_to_serializer(:post, :animated_avatar) do
-    object.user.try(:animated_avatar)
-  rescue StandardError
-    nil
-  end
+
+  add_to_serializer(:user, :can_use_animated_avatar) { object.can_use_animated_avatar? }
 end
 
 Discourse::Application.routes.append do
+  put "/u/:username/animated-avatar" =>
+        "discourse_animated_avatars/animated_avatars#update",
+      :constraints => {
+        username: RouteFormat.username,
+      }
+
   get "user_avatar/:hostname/:username/:size/:version.gif" => "user_avatars#show",
       :constraints => {
         hostname: /[\w\.-]+/,

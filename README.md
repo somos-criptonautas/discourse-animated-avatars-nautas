@@ -1,6 +1,10 @@
 # discourse-animated-avatars
 
-Adds the ability for users to upload gif avatars which will animate on hover or selection in posts, user cards, and profile pages
+Lets users upload a **second, animated avatar** alongside their regular one.
+
+The regular avatar is used everywhere — posts, topic lists, the header, the sidebar. The animated
+one is shown only on the user's profile page and user card, and only for users at or above
+`animated_avatars_min_trust_level_to_display`. Users upload it from Preferences → Account.
 
 ## Enable gif resizing
 

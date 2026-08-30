@@ -10,15 +10,13 @@ acceptance("Animated avatars topic tests", function (needs) {
     server.get(topicPath, () => helper.response(topicResponse));
   });
 
-  test("does not have animated class with no animated avatar", async function (assert) {
-    await visit("/t/-/280");
+  test("posts never render the animated avatar", async function (assert) {
+    await visit("/t/-/1000");
+    assert
+      .dom(".topic-post img.avatar[src$='.gif']")
+      .doesNotExist("keeps the static avatar in topics");
     assert
       .dom(".animated-avatar")
-      .doesNotExist("does not add an animated-avatar class");
-  });
-
-  test("has animated class when animated avatar", async function (assert) {
-    await visit("/t/-/1000");
-    assert.dom(".animated-avatar").exists("adds an animated-avatar class");
+      .doesNotExist("adds no animated marker outside cards and profiles");
   });
 });
