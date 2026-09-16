@@ -9,13 +9,9 @@ module ::DiscourseAnimatedAvatars
   UPLOAD_FIELD = "animated_avatar_upload_id"
 end
 
-after_initialize do
-  require_relative "lib/discourse_animated_avatars/upload_creator_gifsicle_extension"
-  require_relative "lib/discourse_animated_avatars/upload_creator_no_gifsicle_extension"
-  require_relative "lib/discourse_animated_avatars/optimized_image_extension"
-  require_relative "lib/discourse_animated_avatars/user_avatars_controller_extension"
-  require_relative "app/controllers/discourse_animated_avatars/animated_avatars_controller"
+require_relative "lib/discourse_animated_avatars/engine"
 
+after_initialize do
   reloadable_patch do
     gifsicle_installed =
       begin
@@ -38,6 +34,8 @@ after_initialize do
       # fallback if no gifsicle, no cropping for animated avatars
       UploadCreator.prepend(DiscourseAnimatedAvatars::UploadCreatorNoGifsicleExtension)
     end
+    UploadCreator.prepend(DiscourseAnimatedAvatars::UploadCreatorAnimatedWebpExtension)
+    UploadCreator.prepend(DiscourseAnimatedAvatars::UploadCreatorGifToWebpExtension)
 
     OptimizedImage.prepend(DiscourseAnimatedAvatars::OptimizedImageExtension)
     UserAvatarsController.prepend(DiscourseAnimatedAvatars::UserAvatarsControllerExtension)
@@ -54,7 +52,7 @@ after_initialize do
     staff? || trust_level >= SiteSetting.animated_avatars_min_trust_level_to_display
   end
 
-  # ponytail: serves the full cropped gif (avatar_sizes.max), rendered at 144px.
+  # ponytail: serves the full cropped upload (gif or webp, avatar_sizes.max) at 144px.
   # Swap for an OptimizedImage if the weight ever shows up in page timings.
   add_to_class(:user, :animated_avatar) do
     return nil unless can_use_animated_avatar?
@@ -79,11 +77,13 @@ Discourse::Application.routes.append do
         username: RouteFormat.username,
       }
 
-  get "user_avatar/:hostname/:username/:size/:version.gif" => "user_avatars#show",
-      :constraints => {
-        hostname: /[\w\.-]+/,
-        size: /\d+/,
-        username: RouteFormat.username,
-        format: :gif,
-      }
+  %i[gif webp].each do |fmt|
+    get "user_avatar/:hostname/:username/:size/:version.#{fmt}" => "user_avatars#show",
+        :constraints => {
+          hostname: /[\w\.-]+/,
+          size: /\d+/,
+          username: RouteFormat.username,
+          format: fmt,
+        }
+  end
 end

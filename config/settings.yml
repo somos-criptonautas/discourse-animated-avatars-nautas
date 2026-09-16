@@ -3,3 +3,11 @@ trust:
     default: 3
     enum: "TrustLevelSetting"
     client: true
+  animated_gif_avatar_to_webp:
+    default: true
+    client: false
+  animated_gif_avatar_webp_quality:
+    default: 80
+    min: 1
+    max: 100
+    client: false
