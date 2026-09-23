@@ -2,6 +2,8 @@ es:
   site_settings:
     animated_avatars_min_trust_level_to_display: "Nivel de confianza mínimo para mostrar un avatar animado"
     animated_avatars_expanded_profile_only: "Animar el avatar del perfil solo cuando la cabecera del perfil está expandida. Si se desactiva, el avatar animado también se muestra en la cabecera contraída."
+    animated_gif_avatar_to_webp: "Convertir automáticamente los avatares GIF animados a WebP al subirlos, reduciendo el tamaño del archivo."
+    animated_gif_avatar_webp_quality: "Calidad de la conversión de GIF a WebP. Se recomiendan valores entre 75 y 100."
   animated_avatars:
     missing_upload: "No se ha encontrado ese archivo."
     not_animated: "Esa imagen no está animada. Sube un GIF animado."
