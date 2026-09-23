@@ -3,6 +3,9 @@ trust:
     default: 3
     enum: "TrustLevelSetting"
     client: true
+  animated_avatars_expanded_profile_only:
+    default: true
+    client: true
   animated_gif_avatar_to_webp:
     default: true
     client: false

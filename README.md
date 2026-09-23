@@ -9,6 +9,7 @@ one is shown only on the user's profile page and user card, and only for users a
 ## Settings
 
 - `animated_avatars_min_trust_level_to_display` - minimum trust level to upload and display an animated avatar. (default 3)
+- `animated_avatars_expanded_profile_only` - only animate the profile avatar while the profile header is expanded; the collapsed header keeps the regular static avatar. (default: true)
 - `animated_gif_avatar_to_webp` - auto converts animated gif avatars to webp on upload, reducing file size. (default: true)
 - `animated_gif_avatar_webp_quality` - the quality of the converted gif to webp. Recommended settings between 75% to 100% (default: 80%)
 
