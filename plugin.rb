@@ -2,6 +2,7 @@
 # name: discourse-animated-avatars
 # about: This plugin adds support for animated avatars
 # version: 0.1
+# authors: Discourse, Criptonautas
 # url: https://github.com/discourse/discourse-animated-avatars
 
 module ::DiscourseAnimatedAvatars

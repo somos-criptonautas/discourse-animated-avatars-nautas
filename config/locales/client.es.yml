@@ -1,0 +1,5 @@
+es:
+  js:
+    animated_avatars:
+      title: "Avatar animado"
+      instructions: "Solo se muestra en tu página de perfil y en tu tarjeta de usuario. En el resto del foro se usa tu avatar normal."

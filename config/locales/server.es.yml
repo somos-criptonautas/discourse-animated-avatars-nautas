@@ -1,0 +1,7 @@
+es:
+  site_settings:
+    animated_avatars_min_trust_level_to_display: "Nivel de confianza mínimo para mostrar un avatar animado"
+    animated_avatars_expanded_profile_only: "Animar el avatar del perfil solo cuando la cabecera del perfil está expandida. Si se desactiva, el avatar animado también se muestra en la cabecera contraída."
+  animated_avatars:
+    missing_upload: "No se ha encontrado ese archivo."
+    not_animated: "Esa imagen no está animada. Sube un GIF animado."
