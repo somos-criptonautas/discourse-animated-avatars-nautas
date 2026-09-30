@@ -1,12 +1,12 @@
 # frozen_string_literal: true
-# name: discourse-animated-avatars
+# name: discourse-animated-avatars-nautas
 # about: This plugin adds support for animated avatars
 # version: 0.1
-# authors: Discourse, Criptonautas
+# authors: Discourse — Forked by Criptonautas
 # url: https://github.com/discourse/discourse-animated-avatars
 
 module ::DiscourseAnimatedAvatars
-  PLUGIN_NAME = "discourse-animated-avatars"
+  PLUGIN_NAME = "discourse-animated-avatars-nautas"
   UPLOAD_FIELD = "animated_avatar_upload_id"
 end
 

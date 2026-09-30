@@ -1,5 +1,7 @@
 # discourse-animated-avatars
 
+**ENGLISH** | [ESPAÑOL](README.es.md)
+
 Lets users upload a **second, animated avatar** (gif or webp) alongside their regular one.
 
 The regular avatar is used everywhere — posts, topic lists, the header, the sidebar. The animated
@@ -33,3 +35,9 @@ hooks:
         cmd:
           - $home/plugins/discourse-animated-avatars/scripts/install.sh
 ```
+
+## License
+
+MIT (upstream: Civilized Discourse Construction Kit, Inc.). Modifications © 2026 Criptonautas. See [LICENSE](LICENSE).
+
+Text of this README under [CC BY-NC-SA 4.0](CC-BY-NC-SA-4.0.txt).

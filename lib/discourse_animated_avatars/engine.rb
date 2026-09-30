@@ -2,7 +2,7 @@
 
 module DiscourseAnimatedAvatars
   class Engine < ::Rails::Engine
-    engine_name "discourse-animated-avatars"
+    engine_name "discourse-animated-avatars-nautas"
     isolate_namespace DiscourseAnimatedAvatars
     config.autoload_paths << File.join(config.root, "lib")
   end
