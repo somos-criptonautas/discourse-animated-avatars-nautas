@@ -1,4 +1,4 @@
-# discourse-animated-avatars
+# discourse-animated-avatars-nautas
 
 [ENGLISH](README.md) | **ESPAÑOL**
 
@@ -28,12 +28,12 @@ hooks:
     - exec:
         cd: $home/plugins
         cmd:
-          - git clone https://github.com/discourse/discourse-animated-avatars.git
+          - git clone https://github.com/somos-criptonautas/discourse-animated-avatars-nautas.git
     - exec:
-        cd: $home/plugins/discourse-animated-avatars
+        cd: $home/plugins/discourse-animated-avatars-nautas
         raise_on_fail: false
         cmd:
-          - $home/plugins/discourse-animated-avatars/scripts/install.sh
+          - $home/plugins/discourse-animated-avatars-nautas/scripts/install.sh
 ```
 
 ## Licencia
