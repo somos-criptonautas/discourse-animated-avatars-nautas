@@ -2,6 +2,8 @@
 
 [ENGLISH](README.md) | **ESPAÑOL**
 
+Mantenido por Criptonautas. Sin afiliación ni respaldo de Discourse (Civilized Discourse Construction Kit, Inc.).
+
 Permite a los usuarios subir un **segundo avatar animado** (gif o webp) junto a su avatar normal.
 
 El avatar normal se usa en todas partes: posts, listas de temas, cabecera, barra lateral. El animado

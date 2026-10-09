@@ -2,6 +2,8 @@
 
 **ENGLISH** | [ESPAÑOL](README.es.md)
 
+Maintained by Criptonautas. Not affiliated with or endorsed by Discourse (Civilized Discourse Construction Kit, Inc.).
+
 Lets users upload a **second, animated avatar** (gif or webp) alongside their regular one.
 
 The regular avatar is used everywhere — posts, topic lists, the header, the sidebar. The animated
