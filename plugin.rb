@@ -53,7 +53,7 @@ after_initialize do
     staff? || trust_level >= SiteSetting.animated_avatars_min_trust_level_to_display
   end
 
-  # ponytail: serves the full cropped upload (gif or webp, avatar_sizes.max) at 144px.
+  # Serves the full cropped upload (gif or webp, avatar_sizes.max) at 144px.
   # Swap for an OptimizedImage if the weight ever shows up in page timings.
   add_to_class(:user, :animated_avatar) do
     return nil unless can_use_animated_avatar?

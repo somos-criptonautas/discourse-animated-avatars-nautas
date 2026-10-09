@@ -3,7 +3,7 @@ import { modifier } from "ember-modifier";
 import { getURLWithCDN } from "discourse/lib/get-url";
 import { prefersReducedMotion } from "discourse/lib/utilities";
 
-// ponytail: core exposes no outlet around the card avatar itself, so we reach
+// Core exposes no outlet around the card avatar itself, so we reach
 // for the sibling img. Replace with a proper outlet if core ever adds one.
 const swapAvatar = modifier((element, [url]) => {
   const img = element.closest(".user-card-avatar")?.querySelector("img.avatar");
