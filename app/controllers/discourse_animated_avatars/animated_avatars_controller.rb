@@ -17,8 +17,12 @@ module DiscourseAnimatedAvatars
       if upload_id.nil?
         user.custom_fields.delete(DiscourseAnimatedAvatars::UPLOAD_FIELD)
       else
+        guardian.ensure_can_pick_avatar_source!(user, "uploaded")
+
         upload = Upload.find_by(id: upload_id)
         return render_json_error(I18n.t("animated_avatars.missing_upload")) if upload.nil?
+
+        guardian.ensure_can_pick_avatar!(user.user_avatar || user.build_user_avatar, upload)
 
         return render_json_error(I18n.t("animated_avatars.not_animated")) unless upload.animated?
 
