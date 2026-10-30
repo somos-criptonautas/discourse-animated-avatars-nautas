@@ -5,7 +5,7 @@ RSpec.describe DiscourseAnimatedAvatars::AnimatedAvatarsController do
   fab!(:low_tl_user) { Fabricate(:user, trust_level: TrustLevel[0], refresh_auto_groups: true) }
   fab!(:animated_upload) { Fabricate(:upload, user: user, extension: "gif", animated: true) }
   fab!(:static_upload) { Fabricate(:upload, user: user, extension: "png", animated: false) }
-  fab!(:other_user) { Fabricate(:user) }
+  fab!(:other_user, :user)
   fab!(:other_upload) { Fabricate(:upload, user: other_user, extension: "gif", animated: true) }
 
   before do
